@@ -16,6 +16,14 @@ export type CatalogueItem = {
 const L = (fr: string, en: string, ar: string) => ({ fr, en, ar });
 
 export const catalogue: CatalogueItem[] = [
+  { slug: "agbada-ivoire-brode", name: L("Grand boubou ivoire brodé", "Embroidered ivory grand boubou", "بوبو عاجي كبير مطرز"), images: ["agbada-ivoire-brode"] },
+  { slug: "agbada-bleu-marine", name: L("Grand boubou bleu marine", "Navy grand boubou", "بوبو كبير كحلي"), images: ["agbada-bleu-marine"] },
+  { slug: "grand-boubou-vert-bazin", name: L("Grand boubou vert olive damassé", "Olive damask grand boubou", "بوبو كبير زيتوني مطرز"), images: ["grand-boubou-vert-bazin"] },
+  { slug: "ensemble-chocolat-brode", name: L("Ensemble chocolat galon doré", "Chocolate set, gold trim", "طقم بني بشريط ذهبي"), images: ["ensemble-chocolat-brode"] },
+  { slug: "tunique-bleu-bicolore", name: L("Tunique bleu bicolore", "Two-tone blue tunic", "قميص أزرق بلونين"), images: ["tunique-bleu-bicolore"] },
+  { slug: "tunique-petrole-lion", name: L("Tunique bleu pétrole brodée lion", "Teal tunic, lion embroidery", "قميص أزرق بترولي بتطريز أسد"), images: ["tunique-petrole-lion"] },
+  { slug: "djellaba-bleu-acier", name: L("Djellaba bleu acier", "Steel blue djellaba", "جلابية زرقاء فولاذية"), images: ["djellaba-bleu-acier"] },
+  { slug: "ensemble-pied-de-poule", name: L("Ensemble pied-de-poule bicolore", "Two-tone houndstooth set", "طقم مربعات بلونين"), images: ["ensemble-pied-de-poule"] },
   { slug: "ensemble-prune", name: L("Ensemble prune col zippé", "Plum zip-collar set", "طقم برقوقي بياقة بسحاب"), images: ["ensemble-prune"] },
   { slug: "tunique-beige-brodee", name: L("Tunique beige brodée", "Embroidered beige tunic", "قميص بيج مطرز"), images: ["tunique-beige-brodee"] },
   { slug: "djellaba-bleu-nuit", name: L("Djellaba bleu nuit", "Midnight blue djellaba", "جلابية كحلية"), images: ["djellaba-bleu-nuit"] },
