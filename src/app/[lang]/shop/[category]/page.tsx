@@ -9,6 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 import { CatalogBrowser } from "@/components/catalog-browser";
 import { EmptyCatalog } from "@/components/empty-catalog";
 import { Photo } from "@/components/photo";
+import { CatalogueGrid } from "@/components/catalogue-grid";
 import { departmentPhoto } from "@/lib/editorial";
 
 const SORTS: SortKey[] = ["featured", "new", "price-asc", "price-desc"];
@@ -63,6 +64,8 @@ export default async function CategoryPage({ params, searchParams }: PageProps<"
           <Suspense>
             <CatalogBrowser products={products} locale={lang} t={t} subs={[...dept.subs]} />
           </Suspense>
+        ) : ["men", "new-arrivals", "collections"].includes(category) ? (
+          <CatalogueGrid locale={lang} />
         ) : (
           <EmptyCatalog text={t.shop.noProducts} hint={t.shop.noProductsHint} cta={t.shop.browseWhatsapp} />
         )}

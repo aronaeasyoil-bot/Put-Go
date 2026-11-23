@@ -7,6 +7,7 @@ import { getInstagramMedia } from "@/lib/instagram";
 import { SITE } from "@/lib/site";
 import type { PhotoKey } from "@/lib/editorial";
 import { Photo } from "@/components/photo";
+import { CatalogueGrid } from "@/components/catalogue-grid";
 import { ProductRail } from "@/components/product-rail";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { InstagramIcon, WhatsAppIcon } from "@/components/icons";
@@ -91,7 +92,12 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <section aria-label={t.nav.collections} className="grid gap-1 bg-white pt-1 sm:grid-cols-3">
         {departments.map((d) => (
           <Link key={d.key} href={L(`/shop/${d.key}`)} className="group relative block aspect-[3/4] overflow-hidden bg-cream sm:aspect-[2/3]">
-            <Photo name={d.photo} sizes="(min-width: 640px) 33vw, 100vw" ratio={1.5} position={d.pos} className="transition-transform duration-[1.4s] ease-out group-hover:scale-105" />
+            {d.key === "men" ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src="/catalogue/ensemble-prune.webp" alt="PUT & GO" loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" style={{ objectPosition: "50% 20%" }} />
+            ) : (
+              <Photo name={d.photo} sizes="(min-width: 640px) 33vw, 100vw" ratio={1.5} position={d.pos} className="transition-transform duration-[1.4s] ease-out group-hover:scale-105" />
+            )}
             <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
               <p className="font-display text-5xl sm:text-6xl">{t.nav[d.key]}</p>
@@ -113,19 +119,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           locale={lang}
           t={t}
           empty={
-            <div className="grid gap-1 sm:grid-cols-4">
-              {(["women2", "menCity", "traditional2", "men2"] as PhotoKey[]).map((k, i) => (
-                <div key={k} className={`relative aspect-[3/4] overflow-hidden bg-cream ${i > 1 ? "hidden sm:block" : ""}`}>
-                  <Photo name={k} sizes="(min-width: 640px) 25vw, 50vw" ratio={1.33} position="50% 20%" />
-                </div>
-              ))}
-              <div className="flex flex-col items-center gap-4 bg-cream px-6 py-8 text-center sm:col-span-4">
-                <p className="max-w-xl text-sm text-ink/80">{t.home.emptyCatalog}</p>
-                <a href={SITE.whatsappCatalogUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-ink px-6 py-3.5 text-xs uppercase tracking-[0.2em] text-white hover:bg-ink-soft">
-                  <WhatsAppIcon className="h-4 w-4" /> {t.common.whatsappCatalog}
-                </a>
-              </div>
-            </div>
+            <>
+              <CatalogueGrid locale={lang} limit={8} />
+              <div className="mt-12 text-center"><CtaLink href={L("/catalogue")}>{t.common.viewAll}</CtaLink></div>
+            </>
           }
         />
         {newArrivals.length > 0 && (

@@ -4,6 +4,7 @@ import { departments } from "@/lib/catalog-structure";
 import { infoSlugs } from "@/content/pages";
 import { searchProducts } from "@/lib/shopify";
 import { siteUrl } from "@/lib/site";
+import { catalogue } from "@/content/catalogue";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     entry("", 1),
     ...departments.map((d) => entry(`/shop/${d.key}`, 0.8)),
     ...products.map((p) => ({ ...entry(`/products/${p.handle}`, 0.7), lastModified: p.updatedAt })),
+    entry("/catalogue", 0.9),
+    ...catalogue.map((i) => entry(`/catalogue/${i.slug}`, 0.7)),
     ...infoSlugs.map((s) => entry(`/${s}`, 0.3)),
   ];
 }
