@@ -97,3 +97,11 @@ html[lang="ar"] .eyebrow {
   outline: 2px solid var(--color-gold);
   outline-offset: 2px;
 }
+
+@keyframes heroZoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [class*="heroZoom"] { animation: none !important; }
+}
