@@ -68,7 +68,17 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <img src={heroImage} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />
         ) : (
           <div className="absolute inset-0 -z-10">
-            <Photo name="hero" priority position="65% 30%" className="scale-105 animate-[heroZoom_14s_ease-out_forwards]" />
+            <picture>
+              <source media="(max-width: 767px)" srcSet="/catalogue/hero-scene-mobile.webp" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/catalogue/hero-scene.webp"
+                alt="PUT & GO sur scène"
+                fetchPriority="high"
+                decoding="async"
+                className="h-full w-full scale-105 animate-[heroZoom_14s_ease-out_forwards] object-cover object-[50%_25%]"
+              />
+            </picture>
           </div>
         )}
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-black/75 via-black/20 to-black/10" />
