@@ -44,10 +44,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const heroVideo = process.env.HERO_VIDEO_URL;
   const heroImage = process.env.HERO_IMAGE_URL;
 
-  const departments: { key: "women" | "men" | "kids"; label: string; photo: PhotoKey; pos?: string }[] = [
-    { key: "women", label: t.home.shopWomen, photo: "women", pos: "50% 20%" },
-    { key: "men", label: t.home.shopMen, photo: "men", pos: "50% 15%" },
-    { key: "kids", label: t.home.shopKids, photo: "kids", pos: "50% 25%" },
+  const departments: { key: "women" | "men" | "kids"; photo: PhotoKey; pos?: string }[] = [
+    { key: "women", photo: "women", pos: "50% 20%" },
+    { key: "men", photo: "men", pos: "50% 15%" },
+    { key: "kids", photo: "kids", pos: "50% 25%" },
   ];
 
   return (
@@ -94,8 +94,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <Photo name={d.photo} sizes="(min-width: 640px) 33vw, 100vw" ratio={1.5} position={d.pos} className="transition-transform duration-[1.4s] ease-out group-hover:scale-105" />
             <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
-              <p className="eyebrow mb-2 text-white/80">{t.nav[d.key]}</p>
-              <p className="font-display text-4xl sm:text-5xl">{d.label}</p>
+              <p className="font-display text-5xl sm:text-6xl">{t.nav[d.key]}</p>
               <span className="eyebrow mt-4 inline-block border-b border-white/70 pb-1 transition-colors group-hover:border-gold-light group-hover:text-gold-light">{t.common.shopNow}</span>
             </div>
           </Link>
