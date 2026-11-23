@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "put-and-go",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "put-and-go" }],
+  "workers_dev": true,
+  "preview_urls": true,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+    "logs": { "enabled": true, "invocation_logs": true }
+  },
+  // Non-secret configuration. Secrets (tokens) are set with `wrangler secret put` or in the dashboard, never here.
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://put-and-go.arona-easyoil.workers.dev",
+    "SHOPIFY_API_VERSION": "2026-10",
+    "SHOPIFY_BASE_CURRENCY": "XOF"
+  }
+}

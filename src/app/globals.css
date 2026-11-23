@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0b0b0b;
+  --color-ink-soft: #1a1a1a;
+  --color-paper: #faf8f4;
+  --color-cream: #f2ede4;
+  --color-stone: #8a8378;
+  --color-line: #e4ded3;
+  --color-gold: #c9a24b;
+  --color-gold-light: #e8c96f;
+  --color-gold-deep: #9a7426;
+  --font-sans: var(--font-jost), "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-arabic: var(--font-kufi), Tahoma, sans-serif;
+  --tracking-luxe: 0.22em;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+html[lang="ar"] body {
+  font-family: var(--font-arabic);
+}
+
+html[lang="ar"] .font-display {
+  font-family: var(--font-arabic);
+  font-weight: 600;
+}
+
+.gold-text {
+  background: linear-gradient(100deg, var(--color-gold-deep), var(--color-gold-light) 45%, var(--color-gold) 70%, var(--color-gold-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: var(--tracking-luxe);
+  text-transform: uppercase;
+}
+
+html[lang="ar"] .eyebrow {
+  letter-spacing: 0;
+  font-size: 0.8rem;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.reveal {
+  animation: reveal 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
