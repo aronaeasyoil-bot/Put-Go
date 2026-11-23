@@ -3,12 +3,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { hasLocale, locales } from "@/i18n/config";
-import { catalogue, catalogueImage, catalogueText, getCatalogueItem } from "@/content/catalogue";
-import { CatalogueCard } from "@/components/catalogue-grid";
+import { catalogue, catalogueImage, catalogueText, getCatalogueItem, kindText, madeToMeasure } from "@/content/catalogue";
+import { CatalogueCard, PriceButton } from "@/components/catalogue-grid";
 import { pageMetadata } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 import { productEnquiryLink } from "@/lib/whatsapp";
-import { formatMoney } from "@/lib/format";
 import { WhatsAppIcon } from "@/components/icons";
 
 export const dynamicParams = false;
@@ -22,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/catalogue/
   if (!hasLocale(lang) || !item) return {};
   return {
     title: item.name[lang],
-    description: `${item.name[lang]} — PUT & GO, Dakar.`,
+    description: `${item.name[lang]} — ${kindText[item.kind][lang]}`,
     openGraph: { images: [catalogueImage(item.images[0])] },
     ...pageMetadata(lang, `/catalogue/${slug}`),
   };
@@ -52,9 +51,10 @@ export default async function CatalogueItemPage({ params }: PageProps<"/[lang]/c
         <div className="lg:sticky lg:top-40 lg:self-start">
           <p className="eyebrow mb-3 text-gold-deep">{t.men}</p>
           <h1 className="font-display text-4xl sm:text-5xl">{name}</h1>
-          <p className="mt-4 text-lg">{item.price ? formatMoney(String(item.price), "XOF", lang) : t.priceOnRequest}</p>
+          <div className="mt-6"><PriceButton item={item} locale={lang} large /></div>
           <div className="gold-rule my-8 w-24" />
-          <p className="max-w-md text-sm leading-relaxed text-ink/75">{t.howTo}</p>
+          <p className="max-w-md text-[0.95rem] leading-relaxed text-ink/80">{kindText[item.kind][lang]}</p>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-stone">{madeToMeasure[lang]}</p>
           <a href={productEnquiryLink(lang, name, url)} target="_blank" rel="noopener noreferrer" className="mt-8 flex w-full items-center justify-center gap-2 bg-[#25D366] px-6 py-4 text-sm uppercase tracking-[0.15em] text-white sm:w-auto sm:inline-flex">
             <WhatsAppIcon className="h-5 w-5" /> {t.order}
           </a>

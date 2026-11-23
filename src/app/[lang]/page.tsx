@@ -45,6 +45,12 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const heroVideo = process.env.HERO_VIDEO_URL;
   const heroImage = process.env.HERO_IMAGE_URL;
 
+  const stage = {
+    fr: { kicker: "Signé PUT & GO", title: "Sur les plus grandes scènes du Sénégal", text: "Nos créations habillent artistes et personnalités, sur scène comme lors des grandes cérémonies. Une élégance sénégalaise, pensée pour être remarquée.", cta: "Découvrir la collection" },
+    en: { kicker: "Signed PUT & GO", title: "On Senegal’s biggest stages", text: "Our creations dress artists and public figures, on stage and at the grandest ceremonies. Senegalese elegance, made to be noticed.", cta: "Discover the collection" },
+    ar: { kicker: "بتوقيع PUT & GO", title: "على أكبر مسارح السنغال", text: "تُلبس تصاميمنا الفنانين والشخصيات على المسرح وفي أكبر المناسبات. أناقة سنغالية صُمّمت لتلفت الأنظار.", cta: "اكتشف التشكيلة" },
+  }[lang];
+
   const departments: { key: "women" | "men" | "kids"; photo: PhotoKey; pos?: string }[] = [
     { key: "women", photo: "women", pos: "50% 20%" },
     { key: "men", photo: "men", pos: "50% 15%" },
@@ -130,17 +136,26 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         )}
       </section>
 
-      {/* 4 — Editorial: ceremonies */}
-      <section className="grid bg-ink text-white lg:grid-cols-2">
-        <div className="relative aspect-[4/5] overflow-hidden lg:aspect-auto lg:min-h-[760px]">
-          <Photo name="ceremony" sizes="(min-width: 1024px) 50vw, 100vw" position="50% 25%" />
+      {/* 4 — Signature: on stage */}
+      <section className="grid bg-ink text-white lg:grid-cols-[1.35fr_1fr]">
+        <div className="relative aspect-[4/3] overflow-hidden lg:aspect-auto lg:min-h-[720px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/catalogue/scene-artiste.webp" alt="PUT & GO" loading="lazy" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: "45% 30%" }} />
         </div>
         <div className="flex flex-col justify-center px-6 py-16 sm:px-16 lg:px-20">
-          <Kicker light>{t.home.featured}</Kicker>
-          <h2 className="font-display text-4xl leading-tight sm:text-6xl">{t.home.collectionCeremony}</h2>
+          <Kicker light>{stage.kicker}</Kicker>
+          <h2 className="font-display text-4xl leading-tight sm:text-6xl">{stage.title}</h2>
           <div className="gold-rule my-8 w-24" />
-          <p className="max-w-md text-sm leading-relaxed text-white/70">{t.home.featuredText}</p>
-          <div className="mt-10"><CtaLink href={L("/shop/collections")} light>{t.common.shopNow}</CtaLink></div>
+          <p className="max-w-md text-sm leading-relaxed text-white/75">{stage.text}</p>
+          <div className="mt-8 grid max-w-sm grid-cols-2 gap-2">
+            {["scene-noir-or", "scene-noir-or-2"].map((k) => (
+              <div key={k} className="aspect-[4/5] overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/catalogue/${k}.webp`} alt="" loading="lazy" className="h-full w-full object-cover" style={{ objectPosition: "50% 25%" }} />
+              </div>
+            ))}
+          </div>
+          <div className="mt-10"><CtaLink href={L("/catalogue")} light>{stage.cta}</CtaLink></div>
         </div>
       </section>
 
