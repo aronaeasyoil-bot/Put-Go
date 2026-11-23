@@ -60,29 +60,30 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <>
       {/* 1 — Hero */}
-      <section className="relative isolate h-[calc(100svh-104px)] min-h-[560px] overflow-hidden bg-ink text-white lg:h-[calc(100svh-150px)]">
+      <section className="relative isolate overflow-hidden bg-ink text-white md:h-[calc(100svh-150px)] md:min-h-[560px]">
+        {/* Mobile: the whole stage photo, so both people stay in frame; text sits below it. */}
+        {!heroVideo && !heroImage && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src="/catalogue/hero-scene.webp" alt="PUT & GO sur scène" fetchPriority="high" decoding="async" width={2000} height={1408} className="block h-auto w-full md:hidden" />
+        )}
         {heroVideo ? (
           <video className="absolute inset-0 -z-10 h-full w-full object-cover" src={heroVideo} autoPlay muted loop playsInline poster={heroImage} />
         ) : heroImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={heroImage} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />
         ) : (
-          <div className="absolute inset-0 -z-10">
-            <picture>
-              <source media="(max-width: 767px)" srcSet="/catalogue/hero-scene-mobile.webp" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/catalogue/hero-scene.webp"
-                alt="PUT & GO sur scène"
-                fetchPriority="high"
-                decoding="async"
-                className="h-full w-full scale-105 animate-[heroZoom_14s_ease-out_forwards] object-cover object-[50%_25%]"
-              />
-            </picture>
+          <div className="absolute inset-0 -z-10 hidden md:block">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/catalogue/hero-scene.webp"
+              alt=""
+              decoding="async"
+              className="h-full w-full scale-105 animate-[heroZoom_14s_ease-out_forwards] object-cover object-[50%_25%]"
+            />
           </div>
         )}
-        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-black/75 via-black/20 to-black/10" />
-        <div className="mx-auto flex h-full max-w-7xl flex-col justify-end px-5 pb-14 sm:pb-20">
+        <div aria-hidden className="absolute inset-0 -z-10 hidden bg-gradient-to-t from-black/75 via-black/20 to-black/10 md:block" />
+        <div className="mx-auto flex max-w-7xl flex-col justify-end px-5 pb-12 pt-8 md:h-full md:pt-0 md:pb-20">
           <div className="reveal max-w-2xl">
             <Kicker light>{t.home.heroKicker}</Kicker>
             <h1 className="font-display text-[2.9rem] leading-[0.95] sm:text-7xl lg:text-8xl">
